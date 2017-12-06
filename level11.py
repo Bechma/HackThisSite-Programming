@@ -21,7 +21,7 @@ result = session.get(url_objective)
 
 # Take both string and shift from the html
 characters = re.findall("<br />Generated String: (.+)<br />", result.text)[0]
-shift = int(re.findall("<br />Shift: (.+)<br />", result.text)[0])
+shift = int(re.findall("<br />Shift: (-?[0-9]*)<br />", result.text)[0])
 
 # Algorithm math
 result = ""
@@ -36,3 +36,4 @@ for i in characters:
 # Send solution
 payload = {"solution": result}
 session.post(url=url_objective, data=payload, headers=headers)
+session.close()
